@@ -7,6 +7,8 @@ Primeramente es necesario instalar inotify-tools y el servidor de FTP y luego co
 ```shell
 sudo apt-get install inotify-tools proftpd
 
+```
+
 - El fichero proftpd-ftpuser-access.conf es un ejemplo de configuracion de ProFTPd como complemento del script anterior.
 
 
