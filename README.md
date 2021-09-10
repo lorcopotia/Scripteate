@@ -1,5 +1,5 @@
 # Scripteate
 
-Almacen de scripts utiles para cualquier circunstancia!
+Almacén de scripts útiles para cualquier situación!
 
 
