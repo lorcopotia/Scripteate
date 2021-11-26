@@ -7,7 +7,7 @@ subject="GRUPO_PINERO-Reporte_Diario_Openshift_$fecha"
 
 # EJECTURA SCRIPT OCUPACION PV
 
-. /opt/checks/report/pv-preventivo.sh
+. /opt/checks/report/pv-report.sh
 
 # EJECUTA SCRIPT BACKUP ETCD
 
