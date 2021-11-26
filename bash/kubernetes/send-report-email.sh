@@ -1,9 +1,7 @@
 #!/bin/bash
 
 fecha=`date +"%d%m%Y"`
-#from="cloudtools.devops.ssgg@es.logicalis.com"
-#destinatarios="cloudtools.devops.ssgg@es.logicalis.com"
-subject="GRUPO_PINERO-Reporte_Diario_Openshift_$fecha"
+subject="Report_$fecha"
 
 # EJECTURA SCRIPT OCUPACION PV
 
@@ -11,19 +9,19 @@ subject="GRUPO_PINERO-Reporte_Diario_Openshift_$fecha"
 
 # EJECUTA SCRIPT BACKUP ETCD
 
-. /opt/checks/report/etcd-preventivo.sh
+. /opt/checks/report/etcd-report.sh
 
 # EJECTUA SCRIPT BACKUP VELERO
 
-. /opt/checks/report/velero-preventivo.sh
+. /opt/checks/report/velero-report.sh
 
 # EJECUTA SCRIPT ESTADO NODOS
 
-. /opt/checks/report/nodos-preventivo.sh
+. /opt/checks/report/nodos-report.sh
 
 # EJECUTA SCRIPT ESTDO PROYECTOS
 
-. /opt/checks/report/proyects-report.sh
+. /opt/checks/report/proyectos-report.sh
 
 echo "to: admin@example.com
 cc: devopsteam@example.com
