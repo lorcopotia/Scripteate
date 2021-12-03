@@ -1,22 +1,23 @@
 #!/bin/bash
-# Script desarrollado por Duanel Garrido
+# Script desarrollado por Duanel Garrido Milan
 # 2021
 
-PASS=$(openssl rand -base64 8)  # genera un password de 8 caracteres aleatoriamente
+#USER=$1
+PASS=$(openssl rand -base64 8)
 HOME=/mnt/alldisk/disco2
 
 function create_system_ftp_user {
   if [ $(id -u) -eq 0 ]; then
         #read -p "Enter username : " username
         #read -s -p "Enter password : " password
-        egrep "^$USER" /etc/passwd >/dev/null
+        egrep "^$NEWUSER" /etc/passwd >/dev/null
         if [ $? -eq 0 ]; then
                 echo "El usuario: $USER ya existe!"
                 exit 1
         else
-                useradd -m -p "$PASS" -d "$HOME/$USER" $USER
-                [ $? -eq 0 ] && echo "Usuario '$USER' ha sido añadido al sistema! con el passwd: '$PASS'" || echo "No se ha podido añadir el usuario al sistema!"
-                sed 's/USUARIO/meh/g' /home/dunix/bin/base.conf > /etc/proftpd/conf.d/"$USER".conf
+                useradd -m -p "$PASS" -d "$HOME/$NEWUSER" $NEWUSER
+                [ $? -eq 0 ] && echo "Usuario '$NEWUSER' ha sido añadido al sistema! con el passwd: '$PASS'" || echo "No se ha podido añadir el usuario al sistema!"
+                sed 's/USUARIO/meh/g' /home/dunix/bin/base.conf > /etc/proftpd/conf.d/"$NEWUSER".conf
                 sleep 2s; systemctl reload proftpd && echo "Servicio FTP a cargado la nueva configuracion. Conectate!"
 
         fi
@@ -38,7 +39,7 @@ do
         case "$1" in
 
                 -u|--user)
-                        USER="$2"
+                        NEWUSER="$2"
                         shift
                         ;;
 
@@ -49,7 +50,6 @@ do
 
                 -r|--remove)
                         DEL="$2"
-                        userdel $DEL ; rm -f /etc/proftpd/conf.d/"$DEL".conf
                         shift
                         ;;
 
@@ -68,11 +68,14 @@ done
 
 
 
-if [ -z $USER ];
+if [[ -n $NEWUSER ]];
 then
-  echo "Por favor, indicar los parametros necesarios. Ejecutar con --help para ver ayuda.";
-else
-  echo "Usuario: $USER"
-  echo "Directorio raiz: $HOME/$USER"
+  echo "Usuario: $NEWUSER"
+  echo "Directorio raiz: $HOME/$NEWUSER"
   create_system_ftp_user
+elif [[ -n $DEL ]];
+then
+  userdel $DEL ; rm -f /etc/proftpd/conf.d/"$DEL".conf
+else
+  echo "Por favor, indicar los parametros necesarios. Ejecutar con --help para ver ayuda.";
 fi
