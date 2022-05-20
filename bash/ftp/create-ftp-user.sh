@@ -2,7 +2,6 @@
 # Script desarrollado por Duanel Garrido Milan
 # 2021
 
-#USER=$1
 PASS=$(openssl rand -base64 8)
 HOME=/mnt/alldisk/disco2
 
@@ -17,7 +16,7 @@ function create_system_ftp_user {
         else
                 useradd -m -p "$PASS" -d "$HOME/$NEWUSER" $NEWUSER
                 [ $? -eq 0 ] && echo "Usuario '$NEWUSER' ha sido añadido al sistema! con el passwd: '$PASS'" || echo "No se ha podido añadir el usuario al sistema!"
-                sed 's/USUARIO/meh/g' /home/dunix/bin/base.conf > /etc/proftpd/conf.d/"$NEWUSER".conf
+                sed "s/USUARIO/$NEWUSER/g" /home/dunix/bin/base.conf > /etc/proftpd/conf.d/"$NEWUSER".conf
                 sleep 2s; systemctl reload proftpd && echo "Servicio FTP a cargado la nueva configuracion. Conectate!"
 
         fi
@@ -26,12 +25,6 @@ function create_system_ftp_user {
         exit 2
   fi
 }
-
-
-
-#######
-
-#!/bin/bash
 
 # Cargar los parametros pasados por linea de comando
 while [[ $# -gt 0 ]]
@@ -47,7 +40,7 @@ do
                         HOME="$2"
                         shift
                         ;;
-
+                
                 -r|--remove)
                         DEL="$2"
                         shift
@@ -65,8 +58,6 @@ do
         esac
         shift
 done
-
-
 
 if [[ -n $NEWUSER ]];
 then
