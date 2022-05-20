@@ -1,4 +1,5 @@
 # Bash
+- En create-ftp-user hay que tener en cuenta la estructura que existe en /etc/skel a la hora de crear el usuario, por si queremos modificar alguna cosa.
 
 - La función del fichero _process-file-when-uploaded.sh_ es de procesar un fichero cuando es copiado a un directorio específico. Para mas detalles ver comentarios en el script.
 
