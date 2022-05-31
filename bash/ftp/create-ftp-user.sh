@@ -27,9 +27,9 @@ function create_system_ftp_user {
 }
 
 # Cargar los parametros pasados por linea de comando
-while [[ $# -gt 0 ]]
+while [[ getops "u:d:r:" ]]
 do
-        case "$1" in
+        case "${FLAG}" in
 
                 -u|--user)
                         NEWUSER="$2"
@@ -47,12 +47,12 @@ do
                         ;;
 
 
-                --help|*)
+                *)
                         echo "Parametros:"
                         echo "   -u|--user \"valor\""
                         echo "   -d|--dir \"valor\""
                         echo "   -r|--remove \"valor\""
-                        echo "    --help"
+                        echo "   -h"
                         exit 1
                         ;;
         esac
@@ -61,12 +61,13 @@ done
 
 if [[ -n $NEWUSER ]];
 then
+  echo "Creando usuario FTP con los siguientes detalles:"
   echo "Usuario: $NEWUSER"
   echo "Directorio raiz: $HOME/$NEWUSER"
   create_system_ftp_user
 elif [[ -n $DEL ]];
 then
   userdel $DEL ; rm -f /etc/proftpd/conf.d/"$DEL".conf
-else
-  echo "Por favor, indicar los parametros necesarios. Ejecutar con --help para ver ayuda.";
+# else
+#   echo "Por favor, indicar los parametros necesarios. Ejecutar con --help para ver ayuda.";
 fi
