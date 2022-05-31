@@ -16,7 +16,7 @@ echo -e "${BOLDBLUE}UPDATING system database.${ENDCOLOR}"
 sudo pacman -S archlinux-keyring --confirm
 
 echo -e "${ITALICRED}> Installing necessary packages for DuniX environment.${ENDCOLOR}"
-sudo pacman -S virt-manager qemu vde2 iptables-nft dnsmasq bridge-utils openbsd-netcat edk2-ovmf swtpm vim vscode gphoto2 v4l-utils v4l2loopback-dkms ffmpeg --confirm
+sudo pacman -S virt-manager qemu vde2 iptables-nft dnsmasq bridge-utils openbsd-netcat edk2-ovmf swtpm vim vscode gphoto2 v4l-utils v4l2loopback-dkms ffmpeg tor docker docker-compose --confirm
 
 echo -e "${ITALICRED}> Enabling and starting libvirtd service.${ENDCOLOR}"
 sudo systemctl enable libvirtd.service
