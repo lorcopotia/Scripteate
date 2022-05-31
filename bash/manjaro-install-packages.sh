@@ -19,11 +19,17 @@ echo -e "${ITALICRED}> Installing necessary packages for DuniX environment.${END
 sudo pacman -S virt-manager qemu vde2 iptables-nft dnsmasq bridge-utils openbsd-netcat edk2-ovmf swtpm vim vscode gphoto2 v4l-utils v4l2loopback-dkms ffmpeg tor docker docker-compose --confirm
 
 echo -e "${ITALICRED}> Enabling and starting libvirtd service.${ENDCOLOR}"
-sudo systemctl enable libvirtd.service
-sudo systemctl start libvirtd.service
+sudo systemctl enable --now libvirtd.service
 
 echo -e "${ITALICRED}> Adding user to libvirt group.${ENDCOLOR}"
 sudo usermod -a -G libvirt $USER
+
+echo -e "${ITALICRED}> Enabling and starting docker service.${ENDCOLOR}"
+sudo systemctl enable --now docker.service
+
+echo -e "${ITALICRED}> Adding user to docker group.${ENDCOLOR}"
+sudo usermod -a -G docker $USER
+sudo newgrp docker
 
 echo -e "${BOLDBLUE}>> All done. For further instructions go to https://wiki.manjaro.org/index.php/Virt-manager.${ENDCOLOR}"
 
