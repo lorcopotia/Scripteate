@@ -53,26 +53,24 @@ borrar-usuario() {
     read -r details
     if [ $# -lt 1 ] && [ $(id -u) -eq 0 ]; then
         USUARIO=$1
-        egrep "^$USUARIO" /etc/passwd >/dev/null
+        #egrep "^$USUARIO" /etc/passwd >/dev/null
 
-        if [ $? -eq 0 ]; then
-            userdel $USUARIO ; rm -f /etc/proftpd/conf.d/"$USUARIO".conf
+        if [ egrep "^$USUARIO" /etc/passwd >/dev/null ]; then
+            userdel $USUARIO && rm -f /etc/proftpd/conf.d/"$USUARIO".conf
             echo "El usuario: $USUARIO ha sido eliminado!"
-            
         else
             echo -ne "
-$(redprint 'El usuario: $USUARIO no existe en el sistema! \n')
+$(yellowprint 'El usuario: ${USUARIO} no existe en el sistema! \n')
 "
-            exit 1
         fi
     else
         echo -ne "
-$(redprint 'Eres root? has metido: usuario /ruta/del/home ?? \n')
+$(redprint 'Eres root? has metido: usuario ?? \n')
 "
-        exit 2
+        
     fi
 
-    exit 1
+    del-submenu
 
 }
 
