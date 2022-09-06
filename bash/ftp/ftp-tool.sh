@@ -48,12 +48,39 @@ $(redprint 'Eres root? has metido: usuario /ruta/del/home ?? \n')
 
 }
 
+borrar-usuario() {
+    echo -ne "Escriba ej.: pepito : "
+    read -r details
+    if [ $# -lt 1 ] && [ $(id -u) -eq 0 ]; then
+        USUARIO=$1
+        egrep "^$USUARIO" /etc/passwd >/dev/null
+
+        if [ $? -eq 0 ]; then
+            userdel $USUARIO ; rm -f /etc/proftpd/conf.d/"$USUARIO".conf
+            echo "El usuario: $USUARIO ha sido eliminado!"
+            
+        else
+            echo -ne "
+$(redprint 'El usuario: $USUARIO no existe en el sistema! \n')
+"
+            exit 1
+        fi
+    else
+        echo -ne "
+$(redprint 'Eres root? has metido: usuario /ruta/del/home ?? \n')
+"
+        exit 2
+    fi
+
+    exit 1
+
+}
+
 
 del-submenu() {
     echo -ne "
 $(yellowprint 'SUB-SUBMENU')
-$(greenprint '1)') GOOD MORNING
-$(greenprint '2)') GOOD AFTERNOON
+$(greenprint '1)') ELIMINAR USUARIO
 $(blueprint '3)') Go Back to ADD-SUBMENU
 $(magentaprint '4)') Go Back to MAIN MENU
 $(redprint '0)') Exit
@@ -62,11 +89,7 @@ Choose an option:  "
     read -r ans
     case $ans in
     1)
-        fn_goodmorning
-        del-submenu
-        ;;
-    2)
-        fn_goodafternoon
+        borrar-usuario
         del-submenu
         ;;
     3)
