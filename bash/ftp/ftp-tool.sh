@@ -19,7 +19,7 @@ fn_bye() { echo "Bye bye."; exit 0; }
 fn_fail() { echo "Wrong option." exit 1; }
 
 agregar-usuario() {
-    echo -ne "Escriba ej.: pepito /mnt/home/de/pepito"
+    echo -ne "Escriba ej.: pepito /mnt/home/de/pepito : "
     read -r details
     if [ $# -lt 2 ] && [ $(id -u) -eq 0 ]; then
         USUARIO=$1
@@ -38,12 +38,14 @@ agregar-usuario() {
 
         fi
     else
-        echo "Eres root? has metido: usuario /ruta/del/home ??"
+        echo -ne "
+$(redprint 'Eres root? has metido: usuario /ruta/del/home ?? \n')
+"
         exit 2
     fi
 
     exit 1
-fi
+
 }
 
 
