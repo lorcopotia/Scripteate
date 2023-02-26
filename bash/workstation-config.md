@@ -7,6 +7,6 @@
 
 ## Impresora
 1. Instalar los paquetes necesarios:
-  - `pacman -S cups cups-pdf python-pyqt5`
+  - `pacman -S cups ghostscript gsfonts hplip cups-pdf python-pyqt5`
 2. Luego para añadir y configurar la impresora ejecutar:
   - `hp-setup -u`
