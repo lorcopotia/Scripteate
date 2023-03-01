@@ -23,11 +23,11 @@
 2. Una vez que lo encuentra, hay que proceder a descomentar una linea de sane:
 - `sudo sed -i '/hpaio/s/^#//g' /etc/sane.d/dll.conf`
 
-    Tips and tricks
-    To comment line containing specific string with sed, simply do:
-    sed -i '/<pattern>/s/^/#/g' file
-    And to uncomment it:
-    sed -i '/<pattern>/s/^#//g' file
+        ### Tips and tricks
+        To comment line containing specific string with sed, simply do:
+        sed -i '/<pattern>/s/^/#/g' file
+        And to uncomment it:
+        sed -i '/<pattern>/s/^#//g' file
 
 3. Probamos el scanner, podemos hacerlo vía terminal:
   - `sudo scanimage -L` o abrimos simple-scan
