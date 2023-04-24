@@ -15,10 +15,10 @@ oc get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.startTi
 '{.items[*]}[{.status.conditions.message}, {.status.conditions.status}] {"\n"}'
 '{.items[*].status.conditions[?(@.status=="True")].message}{"\n\n"}'
 
-### Lista por PODS y las imagenes de los contenedores que utilizan
+### Lista las imagenes de los contenedores por PODS
 oc get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' | sort
 
-### Lista por namespace
+### Lista las imagenes de los contenedores por NAMESPACE
 oc get pods --namespace <namespace> -o jsonpath="{.items[*].spec.containers[*].image}"
 
 
