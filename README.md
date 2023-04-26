@@ -19,7 +19,9 @@ oc get pods -o=jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.startTi
 oc get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' | sort
 
 ### Lista las imagenes de los contenedores por NAMESPACE
-oc get pods --namespace <namespace> -o jsonpath="{.items[*].spec.containers[*].image}"
+oc/kubectl get pods --namespace <namespace> -o jsonpath="{.items[*].spec.containers[*].image}"
 
+### Muestra informacion de las subredes 
+oc/kubectl get networks/cluster -o jsonpath="{.status}" | jq -r '{ "Cluster Network": .clusterNetwork[].cidr, "Service Network": .serviceNetwork[] }'
 
 ```
