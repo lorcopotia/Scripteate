@@ -2,7 +2,7 @@
 ### Consulta a traves de la API el estado de los nodos del CLUSTER
 ### Seccion de CLUSTER DESARROLLO on Premises
 
-TOKEN_DEV=$(cat /opt/checks/report/tokens/token-awx-desa.txt)
+TOKEN_DEV=$(cat token.txt)
 API_DEV_NODES="https://x.x.x.x:6443/api/v1/nodes/"
 
 
@@ -24,7 +24,7 @@ export NODOS_DEV_CRIT
 
 ### Seccion de CLUSTER PRODUCCION on Premises
 
-TOKEN_PROD=$(cat /opt/checks-logicalis/preventivo/tokens/token-awx-prod.txt)
+TOKEN_PROD=$(cat token.txt)
 API_PROD_NODES="https://x.x.x.x:6443/api/v1/nodes/"
 
 NODOS_PROD_READY=$(curl -k -s -X GET -H "Authorization:Bearer $TOKEN_PROD" $API_PROD_NODES | jq -r '.items[] | select( .status.conditions[].status=="True") | .metadata.name' | wc -l)
@@ -41,7 +41,7 @@ export NODOS_PROD_CRIT
 
 ### Seccion de CLUSTER ARO
 
-TOKEN_ARO=$(cat /opt/checks-logicalis/preventivo/tokens/token-awx-aro.txt)
+TOKEN_ARO=$(cat token.txt)
 API_ARO_NODES="https://x.x.x.x:6443/api/v1/nodes/"
 
 NODOS_ARO_READY=$(curl -k -s -X GET -H "Authorization:Bearer $TOKEN_ARO" $API_ARO_NODES | jq -r '.items[] | select( .status.conditions[].status=="True") | .metadata.name' | wc -l)
