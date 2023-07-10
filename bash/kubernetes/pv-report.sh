@@ -2,9 +2,9 @@
 ### Con este script obtenemos los PV que exceden el umbral de ocupacion establecido
 fichero_json="result.json"
 
-token_ARO=$(cat /opt/checks/report/tokens/token-awx-aro.txt)
-token_DEV=$(cat /opt/checks/report/tokens/token-awx-desa.txt)
-token_PRO=$(cat /opt/checks-logicalis/preventivo/tokens/token-awx-prod.txt)
+token_ARO=$(cat token_ARO.txt)
+token_DEV=$(cat token_DEV.txt)
+token_PRO=$(cat token_PRO.txt)
 url_DEV="https://prometheus-k8s-openshift-monitoring.apps.dev.server/api/v1/query?query="
 url_PRO="https://prometheus-k8s-openshift-monitoring.apps.pro.server/api/v1/query?query="
 url_ARO="https://prometheus-k8s-openshift-monitoring.apps.cloud.server/api/v1/query?query="
