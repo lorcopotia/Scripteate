@@ -12,7 +12,6 @@ project=$1
 # Función para ejecutar una acción específica
 ejecutar_accion() {
     echo "Accion de exportar $1 seleccionada. Proyecto: $project"
-    # Agrega aquí el código para la acción seleccionada
     # Verificar si el proyecto existe
     if oc project $project > /dev/null 2>&1; then
       echo "Proyecto: $project"
@@ -22,15 +21,11 @@ ejecutar_accion() {
       listado=$(oc get $recurso --no-headers -oyaml -o custom-columns=:.metadata.name -n $project)
       echo $listado
 
-      #for elemento in "${listado[@]}"; do
       for elemento in $listado; do
         echo "Ejecutando comando para el elemento: $elemento"
-        # Agrega aquí el comando que deseas ejecutar para cada elemento
-        # Puedes usar la variable $elemento en el comando
+        # Ejecutamos el comando para cada elemento de la lista
         oc get $recurso $elemento -n $project -o yaml > $project-$recurso--$elemento.yaml
-
       done
-
     else
       echo "El proyecto '$project' no existe."
     fi
@@ -42,7 +37,8 @@ while true; do
     echo "------ Menú ------"
     echo "1. Exportar ConfigMaps"
     echo "2. Exportar Secrets"
-    echo "4. Salir"
+    echo "3. Exportar Deployments"
+    echo "9. Salir"
     echo "-------------------"
 
     # Solicita al usuario que seleccione una opción
@@ -56,7 +52,10 @@ while true; do
         2)
             ejecutar_accion secrets
             ;;
-        4)
+        3)
+            ejecutar_accion deployments
+            ;;
+        9)
             echo "Saliendo del script."
             exit 0
             ;;
