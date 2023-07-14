@@ -23,7 +23,7 @@ while IFS= read -r configmap_line; do
     if oc get configmap $configmap -n $project > /dev/null 2>&1; then
       echo "  Exportando ConfigMap: $configmap"
       #oc get configmap $configmap -n $project -o yaml > $project-$configmap.yaml
-      oc get configmap $configmap -n $project -o json | jq '.data."'"$file"'"' -r > $project-$configmap--$file.yaml
+      oc get configmap $configmap -n $project -o json | jq '.data."'"$file"'"' -r > $project--$configmap--$file.yaml
     else
       echo "  El ConfigMap '$configmap' no existe en el proyecto '$project'."
     fi
