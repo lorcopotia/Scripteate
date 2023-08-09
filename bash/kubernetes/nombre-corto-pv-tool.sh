@@ -8,6 +8,6 @@ listaNONPROD=$(oc get pv -o custom-columns=NAME:.metadata.name,SERVER:.spec.nfs.
 
 # Recorremos la lista de PVs y eliminamos del yaml los campos que no necesitamos ej.: las lineas de annotations, resourceVersion, uid, etc
 for elem in $listaNONPROD; do
-  echo -e "oc get pv -oyaml $elem | sed '4d;5d;6d;7d; /resourceVersion/d; /selfLink/d; /uid/d; /creationTimestamp/d; s/ops1adlgp01/&.cartoons.com/; /status/,\$d'  > nombre-corto-new-pvs/$elem-pv.yaml"
+  echo -e "oc get pv -oyaml $elem | sed '4d;5d;6d;7d; /resourceVersion/d; /selfLink/d; /uid/d; /creationTimestamp/d; s/nombre-servidor/&.example.com/; /status/,\$d'  > nombre-corto-new-pvs/$elem-pv.yaml"
   #oc get pv -oyaml $elem | sed '4d;5d;6d;7d; /resourceVersion/d; /selfLink/d; /uid/d; /creationTimestamp/d; s/ops1adlgp01/&.cartoons.com/; /status/,\$d' > nombre-corto-new-pvs/$elem-pv.yaml
 done
