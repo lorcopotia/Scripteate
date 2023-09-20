@@ -2,6 +2,15 @@
 
 Almacén de scripts y sentencias útiles para cualquier situación!
 
+## Manjaro
+Comando para chuleta para la instalacion de los paquetes que utilizo:
+```
+sudo pacman -Syyu
+# En el momento que lo pregunte seleccionar iptables-nft sobre iptables ya que el primero es mas nuevo y tiene mejoras
+sudo pacman -S make gcc linux-headers vim code git qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables obs-studio discord
+```
+
+
 ## JQ / jsonpath regexs
 
 A continuación un grupo de filtros de jq para distintas ocaciones. Estos filtros han sido utilizados en llamadas a la API de Openshift pero en general podrian utilizarse para filtrar salidas JSON.
