@@ -12,7 +12,7 @@ sudo pacman -Syyu
 sudo pacman -S make gcc linux-headers vim code git qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables obs-studio discord samba
 ```
 
-Configurar samba
+Configurar samba */etc/samba/smb.conf*
 ```
 [global]
    workgroup = MANJARO
