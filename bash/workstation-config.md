@@ -1,9 +1,8 @@
 # Configuracion de Escritorio (Arch linux)
 
 ## Añadir los repositorios segun el país y seleccionar los 6 más rápidos:
-1. Primeramente instalar el paquete que contiene `rankmirror`
-  - `pacman -S pacman-contrib`
-  - `curl -s "https://archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -`
+1. Ejecutamos el comando:
+  - `sudo pacman-mirrors --fasttrack 5 && sudo pacman -Syu`
 
 ## Impresora
 1. Instalar los paquetes necesarios:
